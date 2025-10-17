@@ -1,0 +1,131 @@
+# 1 Motorcycle class inherits from Vehicle
+class Vehicle:
+    def __init__(self, brand, model):
+        self.brand = brand
+        self.model = model
+
+class Motorcycle(Vehicle):
+    def __init__(self, brand, model):
+        super().__init__(brand, model)
+
+    def display_info(self):
+        print(f"Motorcycle: {self.brand} {self.model}")
+
+
+# 2 Developer inherits from both Person and Employee
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+class Employee:
+    def __init__(self, emp_id, salary):
+        self.emp_id = emp_id
+        self.salary = salary
+
+class Developer(Person, Employee):
+    def __init__(self, name, age, emp_id, salary, programming_language):
+        Person.__init__(self, name, age)
+        Employee.__init__(self, emp_id, salary)
+        self.programming_language = programming_language
+
+    def display_info(self):
+        print(f"Developer: {self.name}, Age: {self.age}, ID: {self.emp_id}, "
+              f"Salary: {self.salary}, \nLanguage: {self.programming_language}")
+
+
+# 3 Bird class inheriting from Animal
+class Animal:
+    def eat(self):
+        print("Animal is eating")
+
+class Bird(Animal):
+    def eat(self):  # overriding eat()
+        print("Bird is pecking food")
+
+    def fly(self):
+        print("Bird is flying in the sky")
+
+
+# 4 Multiple inheritance with Amphibian
+class Swimmer:
+    def swim(self):
+        print("Swimming in water")
+
+class Walker:
+    def walk(self):
+        print("Walking on land")
+
+class Amphibian(Swimmer, Walker):
+    def move(self):
+        print("Amphibian can both walk and swim")
+
+
+# 5 Use super() to extend a method
+class Parent:
+    def greet(self):
+        print("Called from Parent class")
+
+class Child(Parent):
+    def greet(self):
+        super().greet()   # extends Parent method
+        print("Called from Child class")
+
+
+# 6 Polymorphism with shapes
+import math
+
+class Shape:
+    def area(self):
+        pass
+
+class Circle(Shape):
+    def __init__(self, radius):
+        self.radius = radius
+
+    def area(self):
+        return math.pi * self.radius ** 2
+
+class Rectangle(Shape):
+    def __init__(self, width, height):
+        self.width = width
+        self.height = height
+
+    def area(self):
+        return self.width * self.height
+
+
+# Polymorphic function
+def print_areas(shapes):
+    for shape in shapes:
+        print(f"Area: {shape.area()}")
+
+
+# ---------- TESTING ALL CLASSES ----------
+if __name__ == "__main__":
+    # 1
+    m1 = Motorcycle("CD 70", "R25")
+    m1.display_info()
+
+    # 2
+    dev = Developer("Ayaz Ali ", 20, 14, 85000, "Python Developer")
+    dev.display_info()
+
+    # 3
+    b = Bird()
+    b.eat()
+    b.fly()
+
+    # 4
+    a = Amphibian()
+    a.walk()
+    a.swim()
+    a.move()
+
+    # 5
+    c = Child()
+    c.greet()
+
+    # 6
+    shapes = [Circle(5), Rectangle(4, 7)]
+    print_areas(shapes)
